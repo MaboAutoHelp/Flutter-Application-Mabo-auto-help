@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabo_auto_help/controller/Authcontroller.dart';
 import 'package:mabo_auto_help/view/auth/Login.dart';
 
 class Signup extends StatefulWidget {
@@ -15,14 +16,14 @@ class _SignupState extends State<Signup> {
 
   GlobalKey<FormState> fromstate = GlobalKey<FormState>();
 
-  Signup() {
+  Authcontroller authcontroller = Authcontroller();
+
+  Signup() async {
     var formData = fromstate.currentState;
 
     if (formData!.validate()) {
-      print('Form is valid');
-      // print(name.text);
-      // print(email.text);
-      // print(pwd.text);
+      var data = await authcontroller.SignupAuth(name.text,email.text, pwd.text);
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
     } else {
       print('Form is invalid');
     }
