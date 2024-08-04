@@ -13,6 +13,7 @@ class _SignupState extends State<Signup> {
   TextEditingController email = TextEditingController();
   TextEditingController pwd = TextEditingController();
   TextEditingController name = TextEditingController();
+  TextEditingController tel = TextEditingController();
 
   GlobalKey<FormState> fromstate = GlobalKey<FormState>();
 
@@ -22,7 +23,7 @@ class _SignupState extends State<Signup> {
     var formData = fromstate.currentState;
 
     if (formData!.validate()) {
-      var data = await authcontroller.SignupAuth(name.text,email.text, pwd.text);
+      var data = await authcontroller.SignupAuth(name.text,email.text, pwd.text,tel.text);
       Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
     } else {
       print('Form is invalid');
@@ -93,6 +94,30 @@ class _SignupState extends State<Signup> {
                 decoration: InputDecoration(
                   hintText: "Email",
                   prefixIcon: Icon(Icons.email),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey),
+                  ),
+                ),
+              ),
+            ),
+
+            ///------------------TEL---------------------
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: tel,
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Tel is required';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hintText: "Tel",
+                  prefixIcon: Icon(Icons.twelve_mp),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey),
                   ),
