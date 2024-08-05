@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mabo_auto_help/view/PagePersonnelle.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String userID;
+
+  const Home({super.key, required this.userID});
 
   @override
   State<Home> createState() => _HomeState();
@@ -15,11 +18,11 @@ class _HomeState extends State<Home> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('TabBar Sample'),
+          title: const Text('Sign out'),
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(
-                icon: Icon(Icons.cloud_outlined),
+                icon: Icon(Icons.home),
               ),
               Tab(
                 icon: Icon(Icons.beach_access_sharp),
@@ -30,15 +33,15 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: <Widget>[
             Center(
-              child: Text("It's cloudy here"),
+              child: Pagepersonnelle(userID: widget.userID),
             ),
-            Center(
+            const Center(
               child: Text("It's rainy here"),
             ),
-            Center(
+            const Center(
               child: Text("It's sunny here"),
             ),
           ],
