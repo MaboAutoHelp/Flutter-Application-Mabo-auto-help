@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mabo_auto_help/controller/Authcontroller.dart';
-import 'package:mabo_auto_help/view/auth/Login.dart';
+import 'package:mabo_auto_help/controller/PagepersonnelleContriller.dart';
 
-class Signup extends StatefulWidget {
-  Signup({super.key});
+class Pagepersonnelle extends StatefulWidget {
+  final String userID;
+  const Pagepersonnelle({super.key, required this.userID});
 
   @override
-  State<Signup> createState() => _SignupState();
+  State<Pagepersonnelle> createState() => _PagepersonnelleState();
 }
 
-class _SignupState extends State<Signup> {
+class _PagepersonnelleState extends State<Pagepersonnelle> {
   TextEditingController email = TextEditingController();
   TextEditingController pwd = TextEditingController();
   TextEditingController name = TextEditingController();
@@ -17,19 +17,40 @@ class _SignupState extends State<Signup> {
 
   GlobalKey<FormState> fromstate = GlobalKey<FormState>();
 
-  Authcontroller authcontroller = Authcontroller();
+  PagepersonnelleContriller pagepersonnelleContriller = PagepersonnelleContriller();
 
-  Signup() async {
-    var formData = fromstate.currentState;
-
-    if (formData!.validate()) {
-      var data = await authcontroller.SignupAuth(name.text,email.text,pwd.text,tel.text);
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
-    } else {
-      print('Form is invalid');
-    }
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
   }
 
+  Future<void> _loadUserData() async {
+    var userData = await pagepersonnelleContriller.GetUser(widget.userID);
+    setState(() {
+      email.text = userData['email'];
+      name.text = userData['name'];
+      tel.text = userData['tel'];
+      pwd.text = userData['pwd'];
+    });
+  }
+
+  Future<void> _updateUserData() async {
+    if (fromstate.currentState!.validate()) {
+      var userData = {
+        'email': email.text,
+        'name': name.text,
+        'tel': tel.text,
+        'pwd': pwd.text,
+      };
+      var success = await pagepersonnelleContriller.UpdateUser(widget.userID, userData);
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('User data updated successfully')));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to update user data')));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,24 +60,14 @@ class _SignupState extends State<Signup> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Mabo auto help',
-              style: TextStyle(
-                  fontSize: 30, color: Color.fromARGB(255, 244, 59, 3)),
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text(
-                    'Sign Up',
-                    style: TextStyle(fontSize: 30, color: Colors.lightBlue),
-                  ),
+                  Text('User ID: ${widget.userID}'),
                 ],
               ),
             ),
-
-            ///------------------Name---------------------
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
@@ -79,8 +90,6 @@ class _SignupState extends State<Signup> {
                 ),
               ),
             ),
-
-            ///------------------Email---------------------
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
@@ -103,8 +112,6 @@ class _SignupState extends State<Signup> {
                 ),
               ),
             ),
-
-            ///------------------TEL---------------------
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
@@ -127,8 +134,6 @@ class _SignupState extends State<Signup> {
                 ),
               ),
             ),
-
-            ///-------------------Pwd--------------------
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
@@ -151,39 +156,13 @@ class _SignupState extends State<Signup> {
                 ),
               ),
             ),
-
-            ///--------------------------------------
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () {
-                  Signup();
-                 
-                },
-                child: Text('Sign Up'),
+                onPressed: _updateUserData,
+                child: Text('Edit'),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Login()));
-                    },
-                    child: Text(
-                      'Login->',
-                      style: TextStyle(
-                        color: Colors.lightBlue,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
           ],
         ),
       ),

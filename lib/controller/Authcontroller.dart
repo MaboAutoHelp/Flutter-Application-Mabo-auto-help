@@ -16,7 +16,7 @@ class Authcontroller {
     }
   }
 
-  Future SignupAuth(name ,email, pwd,tel) async {
+  Future SignupAuth(name,email,pwd,tel) async {
     var url = "http://192.168.1.21:8000/users/register";
     var response = await http.post(Uri.parse(url),
         body: jsonEncode(<String, String>{

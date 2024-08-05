@@ -27,7 +27,8 @@ class _LoginState extends State<Login> {
           data["message"] == "email or password is not correct") {
         print("User doesn't exists! or  email or password is not correct");
       } else {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+        print(data);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(userID: data['userID'])));
       }
     } else {
       print('Form is invalid');
