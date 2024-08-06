@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/view/PagePersonnelle.dart';
+import 'package:mabo_auto_help/view/Service.dart';
+import 'package:mabo_auto_help/view/notifications.dart';
 
 class Home extends StatefulWidget {
   final String userID;
@@ -22,13 +24,13 @@ class _HomeState extends State<Home> {
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(
-                icon: Icon(Icons.home),
+                icon: Icon(Icons.assignment_ind_rounded),
               ),
               Tab(
-                icon: Icon(Icons.beach_access_sharp),
+                icon: Icon(Icons.car_crash_sharp),
               ),
               Tab(
-                icon: Icon(Icons.brightness_5_sharp),
+                icon: Icon(Icons.circle_notifications),
               ),
             ],
           ),
@@ -38,11 +40,11 @@ class _HomeState extends State<Home> {
             Center(
               child: Pagepersonnelle(userID: widget.userID),
             ),
-            const Center(
-              child: Text("It's rainy here"),
+             Center(
+              child: Service(userID: widget.userID),
             ),
-            const Center(
-              child: Text("It's sunny here"),
+             Center(
+              child: Notifications(userID: widget.userID),
             ),
           ],
         ),
