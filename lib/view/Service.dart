@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mabo_auto_help/controller/ServiceContriller.dart';
 
 class Service extends StatefulWidget {
   final String userID;
@@ -68,7 +69,8 @@ class _ServiceState extends State<Service> {
   }
 }
 
-class ServiceDetailPage extends StatelessWidget {
+//ServiceDetailPage
+class ServiceDetailPage extends StatefulWidget {
   final String userID;
   final String serviceName;
 
@@ -79,10 +81,88 @@ class ServiceDetailPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _ServiceDetailPageState createState() => _ServiceDetailPageState();
+}
+
+class _ServiceDetailPageState extends State<ServiceDetailPage> {
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
+  String? selectedCarType;
+
+  final ServiceController serviceController = ServiceController();
+
+  final List<String> carTypes = [
+    'سيدان',
+    'دفع رباعي',
+    'هاتشباك',
+    'شاحنة',
+  ];
+
+  void _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  void _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null && picked != selectedTime) {
+      setState(() {
+        selectedTime = picked;
+      });
+    }
+  }
+
+  void _submitRequest(BuildContext context) async {
+    if (selectedDate != null && selectedTime != null && selectedCarType != null) {
+      try {
+        var result = await serviceController.SubmitServiceRequest(
+          context,
+          widget.userID,
+          widget.serviceName,
+          selectedDate!,
+          selectedTime!,
+          selectedCarType!,
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('تم إرسال الطلب بنجاح!'),
+          ),
+        );
+        // يمكنك هنا التعامل مع النتيجة
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('فشل إرسال الطلب'),
+          ),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('يرجى ملء جميع الحقول'),
+        ),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(serviceName),
+        title: Text(widget.serviceName),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -90,15 +170,51 @@ class ServiceDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'User ID: $userID',
+              'User ID: ${widget.userID}',
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 20),
             Text(
-              'تفاصيل الخدمة: $serviceName',
+              'تفاصيل الخدمة: ${widget.serviceName}',
               style: TextStyle(fontSize: 18),
             ),
-            // يمكنك هنا إضافة تفاصيل أخرى للخدمة مثل نموذج تعبئة أو معلومات إضافية
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => _selectDate(context),
+              child: Text(selectedDate == null
+                  ? 'اختر يوم'
+                  : '${selectedDate!.toLocal()}'.split(' ')[0]),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => _selectTime(context),
+              child: Text(selectedTime == null
+                  ? 'اختر توقيت'
+                  : '${selectedTime!.format(context)}'),
+            ),
+            SizedBox(height: 10),
+            DropdownButtonFormField<String>(
+              hint: Text('اختر نوع السيارة'),
+              value: selectedCarType,
+              onChanged: (newValue) {
+                setState(() {
+                  selectedCarType = newValue;
+                });
+              },
+              items: carTypes.map((carType) {
+                return DropdownMenuItem(
+                  value: carType,
+                  child: Text(carType),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: 20),
+            Center(
+              child: ElevatedButton(
+                onPressed: () => _submitRequest(context),
+                child: Text('إرسال الطلب'),
+              ),
+            ),
           ],
         ),
       ),
