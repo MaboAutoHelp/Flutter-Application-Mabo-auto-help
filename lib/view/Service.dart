@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/ServiceContriller.dart';
+import 'package:mabo_auto_help/view/Home.dart';
 
 class Service extends StatefulWidget {
   final String userID;
@@ -141,6 +142,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
             content: Text('تم إرسال الطلب بنجاح!'),
           ),
         );
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(userID: widget.userID)));
         // يمكنك هنا التعامل مع النتيجة
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -169,10 +171,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'User ID: ${widget.userID}',
-              style: TextStyle(fontSize: 18),
-            ),
+           
             SizedBox(height: 20),
             Text(
               'تفاصيل الخدمة: ${widget.serviceName}',
