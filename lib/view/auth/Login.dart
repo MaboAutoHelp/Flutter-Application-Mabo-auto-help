@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/Authcontroller.dart';
-import 'package:mabo_auto_help/view/auth/Signup.dart';
+
 import 'package:mabo_auto_help/view/Home.dart';
 
 class Login extends StatefulWidget {
@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
         print("User doesn't exists! or  email or password is not correct");
       } else {
         print(data);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(userID: data['userID'])));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(adminID: data['adminID'])));
       }
     } else {
       print('Form is invalid');
@@ -45,7 +45,7 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Mabo auto help',
+              Text('Mabo auto help Admin',
                   style: TextStyle(
                       fontSize: 30, color: Color.fromARGB(255, 244, 59, 3))),
 
@@ -68,12 +68,12 @@ class _LoginState extends State<Login> {
                   controller: email,
                   validator: (val) {
                     if (val!.isEmpty) {
-                      return 'Email is required';
+                      return 'username is required';
                     }
                     return null;
                   },
                   decoration: InputDecoration(
-                    hintText: "Email",
+                    hintText: "username",
                     prefixIcon: Icon(Icons.email),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
@@ -119,27 +119,7 @@ class _LoginState extends State<Login> {
                   child: Text('Login'),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Signup()));
-                      },
-                      child: Text(
-                        'Register->',
-                        style: TextStyle(
-                          color: Colors.lightBlue,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
+              
             ],
           ),
         ),

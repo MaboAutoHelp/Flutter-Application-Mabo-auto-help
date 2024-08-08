@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
-import 'package:intl/intl.dart';  // استيراد مكتبة intl
+import 'package:intl/intl.dart'; // استيراد مكتبة intl
 import 'package:mabo_auto_help/controller/NotificationsController.dart';
 
 class Notifications extends StatefulWidget {
-  final String userID;
-  const Notifications({super.key, required this.userID});
+  final String adminID;
+  const Notifications({super.key, required this.adminID});
 
   @override
   State<Notifications> createState() => _NotificationsState();
@@ -17,7 +17,7 @@ class _NotificationsState extends State<Notifications> {
   @override
   void initState() {
     super.initState();
-    notifications = Notificationscontroller.getNotifications(widget.userID);
+    notifications = Notificationscontroller.getNotifications(widget.adminID);
   }
 
   String formatDate(String dateStr) {
@@ -28,7 +28,6 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: FutureBuilder<List>(
         future: notifications,
         builder: (context, snapshot) {
@@ -46,13 +45,16 @@ class _NotificationsState extends State<Notifications> {
                 return Card(
                   margin: EdgeInsets.all(8.0),
                   child: ListTile(
-                    title: Text(notification['serviceName'] ?? 'No service name'),
+                    title:
+                        Text(notification['serviceName'] ?? 'No service name'),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Date: ${formatDate(notification['date'])}'),  // تنسيق التاريخ
+                        Text(
+                            'Date: ${formatDate(notification['date'])}'), // تنسيق التاريخ
                         Text('Time: ${notification['time'] ?? 'No time'}'),
-                        Text('Car Type: ${notification['carType'] ?? 'No car type'}'),
+                        Text(
+                            'Car Type: ${notification['carType'] ?? 'No car type'}'),
                       ],
                     ),
                   ),
