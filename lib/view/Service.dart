@@ -3,8 +3,8 @@ import 'package:mabo_auto_help/controller/ServiceContriller.dart';
 import 'package:mabo_auto_help/view/Home.dart';
 
 class Service extends StatefulWidget {
-  final String userID;
-  const Service({super.key, required this.userID});
+  final String adminID;
+  const Service({super.key, required this.adminID});
 
   @override
   State<Service> createState() => _ServiceState();
@@ -25,7 +25,7 @@ class _ServiceState extends State<Service> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
-                      userID: widget.userID,
+                      userID: widget.adminID,
                       serviceName: 'تغيير زيت المحرك',
                     ),
                   ),
@@ -40,7 +40,7 @@ class _ServiceState extends State<Service> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
-                      userID: widget.userID,
+                      userID: widget.adminID,
                       serviceName: 'كشف على الأعطال',
                     ),
                   ),
@@ -55,7 +55,7 @@ class _ServiceState extends State<Service> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
-                      userID: widget.userID,
+                      userID: widget.adminID,
                       serviceName: 'نقل',
                     ),
                   ),
@@ -142,7 +142,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
             content: Text('تم إرسال الطلب بنجاح!'),
           ),
         );
-         Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(userID: widget.userID)));
+        // Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(adminID: widget.adminID)));
         // يمكنك هنا التعامل مع النتيجة
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(

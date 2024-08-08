@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/PagepersonnelleContriller.dart';
 
 class Pagepersonnelle extends StatefulWidget {
-  final String userID;
-  const Pagepersonnelle({super.key, required this.userID});
+  final String adminID;
+  const Pagepersonnelle({super.key, required this.adminID});
 
   @override
   State<Pagepersonnelle> createState() => _PagepersonnelleState();
@@ -26,7 +26,7 @@ class _PagepersonnelleState extends State<Pagepersonnelle> {
   }
 
   Future<void> _loadUserData() async {
-    var userData = await pagepersonnelleContriller.GetUser(widget.userID);
+    var userData = await pagepersonnelleContriller.GetUser(widget.adminID);
     setState(() {
       email.text = userData['email'];
       name.text = userData['name'];
@@ -43,7 +43,7 @@ class _PagepersonnelleState extends State<Pagepersonnelle> {
         'tel': tel.text,
         'pwd': pwd.text,
       };
-      var success = await pagepersonnelleContriller.UpdateUser(widget.userID, userData);
+      var success = await pagepersonnelleContriller.UpdateUser(widget.adminID, userData);
       if (success) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('User data updated successfully')));
       } else {
