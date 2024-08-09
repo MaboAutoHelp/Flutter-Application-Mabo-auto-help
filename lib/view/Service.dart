@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mabo_auto_help/controller/PagepersonnelleContriller.dart';
 import 'package:mabo_auto_help/controller/ServiceContriller.dart';
 import 'package:mabo_auto_help/view/Home.dart';
 
 class Service extends StatefulWidget {
-  final String adminID;
-  const Service({super.key, required this.adminID});
+  final String userID;
+  const Service({super.key, required this.userID});
 
   @override
   State<Service> createState() => _ServiceState();
@@ -25,7 +26,7 @@ class _ServiceState extends State<Service> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
-                      userID: widget.adminID,
+                      userID: widget.userID,
                       serviceName: 'تغيير زيت المحرك',
                     ),
                   ),
@@ -40,7 +41,7 @@ class _ServiceState extends State<Service> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
-                      userID: widget.adminID,
+                      userID: widget.userID,
                       serviceName: 'كشف على الأعطال',
                     ),
                   ),
@@ -55,7 +56,7 @@ class _ServiceState extends State<Service> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
-                      userID: widget.adminID,
+                      userID: widget.userID,
                       serviceName: 'نقل',
                     ),
                   ),
@@ -91,6 +92,8 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
   String? selectedCarType;
 
   final ServiceController serviceController = ServiceController();
+  final PagepersonnelleContriller pagepersonnelleContriller =
+      PagepersonnelleContriller();
 
   final List<String> carTypes = [
     'سيدان',
@@ -126,16 +129,28 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
   }
 
   void _submitRequest(BuildContext context) async {
-    if (selectedDate != null && selectedTime != null && selectedCarType != null) {
+    if (selectedDate != null &&
+        selectedTime != null &&
+        selectedCarType != null) {
       try {
+        var resultNameTel =
+            await pagepersonnelleContriller.GetUser(widget.userID);
+        var name = resultNameTel['name'];
+        var tel = resultNameTel['tel'];
+        print(name);
+        print(tel);
+
         var result = await serviceController.SubmitServiceRequest(
           context,
           widget.userID,
+          name,
+          tel,
           widget.serviceName,
           selectedDate!,
           selectedTime!,
           selectedCarType!,
         );
+        
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -171,7 +186,6 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           
             SizedBox(height: 20),
             Text(
               'تفاصيل الخدمة: ${widget.serviceName}',
