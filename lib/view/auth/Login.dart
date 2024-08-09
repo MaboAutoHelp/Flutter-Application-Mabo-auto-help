@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
         print("User doesn't exists! or  email or password is not correct");
       } else {
         print(data);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(adminID: data['adminID'])));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(userID: data['userID'])));
       }
     } else {
       print('Form is invalid');
@@ -45,7 +45,7 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Mabo auto help Admin',
+              Text('Mabo auto help ',
                   style: TextStyle(
                       fontSize: 30, color: Color.fromARGB(255, 244, 59, 3))),
 
@@ -68,12 +68,12 @@ class _LoginState extends State<Login> {
                   controller: email,
                   validator: (val) {
                     if (val!.isEmpty) {
-                      return 'username is required';
+                      return 'email is required';
                     }
                     return null;
                   },
                   decoration: InputDecoration(
-                    hintText: "username",
+                    hintText: "email",
                     prefixIcon: Icon(Icons.email),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),

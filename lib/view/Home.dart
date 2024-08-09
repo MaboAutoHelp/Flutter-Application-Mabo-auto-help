@@ -4,9 +4,9 @@ import 'package:mabo_auto_help/view/Service.dart';
 import 'package:mabo_auto_help/view/notifications.dart';
 
 class Home extends StatefulWidget {
-  final String adminID;
+  final String userID;
 
-  const Home({super.key, required this.adminID});
+  const Home({super.key, required this.userID});
 
   @override
   State<Home> createState() => _HomeState();
@@ -38,10 +38,10 @@ class _HomeState extends State<Home> {
         body: TabBarView(
           children: <Widget>[
             Center(
-              child: Pagepersonnelle(adminID: widget.adminID),
+              child: Pagepersonnelle(userID: widget.userID),
             ),
              Center(
-              child: Service(adminID: widget.adminID),
+              child: Service(userID: widget.userID),
             ),
              Center(
              // child: Notifications(adminID: '',),

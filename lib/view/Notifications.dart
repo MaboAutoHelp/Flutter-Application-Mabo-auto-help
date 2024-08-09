@@ -4,8 +4,8 @@ import 'package:intl/intl.dart'; // استيراد مكتبة intl
 import 'package:mabo_auto_help/controller/NotificationsController.dart';
 
 class Notifications extends StatefulWidget {
-  final String adminID;
-  const Notifications({super.key, required this.adminID});
+  final String userID;
+  const Notifications({super.key, required this.userID});
 
   @override
   State<Notifications> createState() => _NotificationsState();
@@ -17,7 +17,7 @@ class _NotificationsState extends State<Notifications> {
   @override
   void initState() {
     super.initState();
-    notifications = Notificationscontroller.getNotifications(widget.adminID);
+    notifications = Notificationscontroller.getNotifications(widget.userID);
   }
 
   String formatDate(String dateStr) {

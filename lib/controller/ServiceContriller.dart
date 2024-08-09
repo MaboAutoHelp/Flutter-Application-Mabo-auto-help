@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ServiceController {
-  Future SubmitServiceRequest(BuildContext context, String userID, String serviceName, DateTime date, TimeOfDay time, String carType) async {
+  Future SubmitServiceRequest(BuildContext context, String userID, String name ,String tel, String serviceName, DateTime date, TimeOfDay time, String carType) async {
     var url = "http://192.168.1.21:8000/Service/registerService";
     var response = await http.post(
       Uri.parse(url),
       body: jsonEncode(<String, String>{
         'userID': userID,
+        'name':name,
+        'teluser':tel,
         'serviceName': serviceName,
         'date': date.toIso8601String(),
         'time': time.format(context),
