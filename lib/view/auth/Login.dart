@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/Authcontroller.dart';
 
 import 'package:mabo_auto_help/view/Home.dart';
+import 'package:mabo_auto_help/view/auth/Signup.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key});
@@ -18,7 +19,7 @@ class _LoginState extends State<Login> {
 
   Authcontroller authcontroller = Authcontroller();
 
-  Login() async {
+  /*Login() async {
     var formData = fromstate.currentState;
 
     if (formData!.validate()) {
@@ -33,7 +34,24 @@ class _LoginState extends State<Login> {
     } else {
       print('Form is invalid');
     }
-  }
+  }*/
+  Future<void> performLogin() async {
+    var formData = fromstate.currentState;
+
+    if (formData!.validate()) {
+        var data = await authcontroller.LoginAuth(email.text, pwd.text);
+        if (data != null && (data["message"] == "User doesn't exists!" ||
+            data["message"] == "email or password is not correct")) {
+            print("User doesn't exists! or email or password is not correct");
+        } else if (data != null) {
+            print(data);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Home(userID: data['userID'])));
+        }
+    } else {
+        print('Form is invalid');
+    }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +132,33 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    Login();
+                     performLogin();
                   },
+
                   child: Text('Login'),
                 ),
               ),
+                Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Signup()));
+                    },
+                    child: Text(
+                      'Sign Up->',
+                      style: TextStyle(
+                        color: Colors.lightBlue,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
               
             ],
           ),
