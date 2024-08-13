@@ -19,7 +19,7 @@ class _NotificationsState extends State<Notifications> {
     notifications = Notificationscontroller.getNotifications(widget.userID);
     
     // تأكيد بدء تنفيذ الـ Future
-    print('Fetching notifications...');
+    /*print('Fetching notifications...');
     
     notifications.then((data) {
       // طباعة البيانات إذا نجح الجلب
@@ -30,7 +30,7 @@ class _NotificationsState extends State<Notifications> {
     }).whenComplete(() {
       // تأكيد اكتمال العملية
       print('Fetch operation completed');
-    });
+    });*/
   }
 
   String formatDate(String dateStr) {
@@ -68,6 +68,7 @@ class _NotificationsState extends State<Notifications> {
                         Text('Date: ${formatDate(notification['date'])}'),
                         Text('Time: ${notification['time'] ?? 'No time'}'),
                         Text('Car Type: ${notification['carType'] ?? 'No car type'}'),
+                        Text('Ita Type: ${notification['ita'] ?? 'No ita type'}'),
                       ],
                     ),
                   ),
