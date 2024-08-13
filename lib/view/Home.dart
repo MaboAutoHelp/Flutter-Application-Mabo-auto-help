@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
               child: Service(userID: widget.userID),
             ),
              Center(
-             // child: Notifications(adminID: '',),
+             child: Notifications(userID: widget.userID),
             ),
           ],
         ),
