@@ -28,11 +28,12 @@ class _ServiceState extends State<Service> {
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
                       serviceName: 'تغيير زيت المحرك',
+                      prix: 50,
                     ),
                   ),
                 );
               },
-              child: const Text('تغيير زيت المحرك'),
+              child: const Text(' تغيير زيت المحرك - 50 د.م'),
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -43,11 +44,12 @@ class _ServiceState extends State<Service> {
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
                       serviceName: 'كشف على الأعطال',
+                      prix: 100,
                     ),
                   ),
                 );
               },
-              child: const Text('كشف على الأعطال'),
+              child: const Text('كشف على الأعطال - 100 د.م'),
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -58,11 +60,12 @@ class _ServiceState extends State<Service> {
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
                       serviceName: 'نقل',
+                      prix: 150,
                     ),
                   ),
                 );
               },
-              child: const Text('نقل'),
+              child: const Text('نقل - 150 د.م'),
             ),
           ],
         ),
@@ -75,11 +78,13 @@ class _ServiceState extends State<Service> {
 class ServiceDetailPage extends StatefulWidget {
   final String userID;
   final String serviceName;
+  final int prix;
 
   const ServiceDetailPage({
     Key? key,
     required this.userID,
     required this.serviceName,
+    required this.prix,
   }) : super(key: key);
 
   @override
@@ -149,6 +154,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
           selectedDate!,
           selectedTime!,
           selectedCarType!,
+          widget.prix,
         );
         
 
