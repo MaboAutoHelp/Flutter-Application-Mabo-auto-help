@@ -10,12 +10,37 @@ class Notificationscontroller {
       //print("Response Data: ${response.body}");
       return json.decode(response.body);
     } else {
-     // print("Error: ${response.statusCode}"); 
+      // print("Error: ${response.statusCode}");
       throw Exception('Failed to load notifications');
     }
   }
-}
 
+  static Future<void> updateService(String id, String ita) async {
+    var url = "http://192.168.1.17:8000/Service/updateService/$id";
+    var response = await http.put(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'ita': ita}),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update service');
+    }
+  }
+  //getAllServicesReparation
+  static Future<List> getAllServicesReparation(String userID) async {
+    var url = "http://192.168.1.17:8000/Service/getAllServicesReparation/$userID";
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      //print("Response Data: ${response.body}");
+      return json.decode(response.body);
+    } else {
+      // print("Error: ${response.statusCode}");
+      throw Exception('Failed to load notifications');
+    }
+  }
+
+}
 
 /*class Notificationscontroller {
   static Future<List> getNotifications(String userID) async {

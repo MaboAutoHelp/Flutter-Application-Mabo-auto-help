@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/view/PagePersonnelle.dart';
 import 'package:mabo_auto_help/view/Service.dart';
 import 'package:mabo_auto_help/view/notifications.dart';
+import 'package:mabo_auto_help/view/prix.dart';
 
 class Home extends StatefulWidget {
   final String userID;
@@ -15,9 +16,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    
     return DefaultTabController(
       initialIndex: 1,
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Sign out'),
@@ -32,6 +34,9 @@ class _HomeState extends State<Home> {
               Tab(
                 icon: Icon(Icons.circle_notifications),
               ),
+              Tab(
+                icon: Icon(Icons.pix),
+              )
             ],
           ),
         ),
@@ -46,6 +51,9 @@ class _HomeState extends State<Home> {
              Center(
              child: Notifications(userID: widget.userID),
             ),
+            Center(
+              child: Prix(userID: widget.userID),
+            )
           ],
         ),
       ),

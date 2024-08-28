@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/PagepersonnelleContriller.dart';
 import 'package:mabo_auto_help/controller/ServiceContriller.dart';
+
 import 'package:mabo_auto_help/view/Home.dart';
 
 class Service extends StatefulWidget {
@@ -33,7 +34,7 @@ class _ServiceState extends State<Service> {
                   ),
                 );
               },
-              child: const Text(' تغيير زيت المحرك - 50 د.م'),
+              child: const Text('تغيير زيت المحرك - 50 د.م'),
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -74,7 +75,7 @@ class _ServiceState extends State<Service> {
   }
 }
 
-//ServiceDetailPage
+// ServiceDetailPage
 class ServiceDetailPage extends StatefulWidget {
   final String userID;
   final String serviceName;
@@ -95,10 +96,15 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
   String? selectedCarType;
+  String? selectedlieu;
 
   final ServiceController serviceController = ServiceController();
-  final PagepersonnelleContriller pagepersonnelleContriller =
-      PagepersonnelleContriller();
+  final PagepersonnelleContriller pagepersonnelleController = PagepersonnelleContriller();
+
+  final List<String> lieu = [
+    'Sans livraison',
+    'livraison',
+  ];
 
   final List<String> carTypes = [
     'سيدان',
@@ -136,14 +142,13 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
   void _submitRequest(BuildContext context) async {
     if (selectedDate != null &&
         selectedTime != null &&
-        selectedCarType != null) {
+        selectedCarType != null &&
+        selectedlieu != null) {
       try {
         var resultNameTel =
-            await pagepersonnelleContriller.GetUser(widget.userID);
+            await pagepersonnelleController.GetUser(widget.userID);
         var name = resultNameTel['name'];
         var tel = resultNameTel['tel'];
-        print(name);
-        print(tel);
 
         var result = await serviceController.SubmitServiceRequest(
           context,
@@ -154,16 +159,15 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
           selectedDate!,
           selectedTime!,
           selectedCarType!,
+          selectedlieu!,
           widget.prix,
         );
-        
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('تم إرسال الطلب بنجاح!'),
           ),
         );
-        // Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(adminID: widget.adminID)));
         // يمكنك هنا التعامل مع النتيجة
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -224,6 +228,21 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
                 return DropdownMenuItem(
                   value: carType,
                   child: Text(carType),
+                );
+              }).toList(),
+            ),
+            DropdownButtonFormField<String>(
+              hint: Text('اختر نوع الخدمة'),
+              value: selectedlieu,
+              onChanged: (newValue) {
+                setState(() {
+                  selectedlieu = newValue;
+                });
+              },
+              items: lieu.map((lieu) {
+                return DropdownMenuItem(
+                  value: lieu,
+                  child: Text(lieu),
                 );
               }).toList(),
             ),
