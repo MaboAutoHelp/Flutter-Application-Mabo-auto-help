@@ -55,6 +55,8 @@ class _NotificationsState extends State<Notifications> {
                         Text(
                             'Car Type: ${notification['carType'] ?? 'No car type'}'),
                         Text(
+                            'lieu: ${notification['lieu'] ?? 'No car type'}'),
+                        Text(
                             'Ita Type: ${notification['ita'] ?? 'No ita type'}'),
                       ],
                     ),
