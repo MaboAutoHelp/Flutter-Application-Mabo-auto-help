@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class Notificationscontroller {
   static Future<List> getNotifications(String userID) async {
-    var url = "http://192.168.1.17:8000/Service/getAllService/$userID";
+    var url = "http://192.168.1.16:8000/Service/getAllService/$userID";
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       //print("Response Data: ${response.body}");
@@ -16,7 +16,7 @@ class Notificationscontroller {
   }
 
   static Future<void> updateService(String id, String ita) async {
-    var url = "http://192.168.1.17:8000/Service/updateService/$id";
+    var url = "http://192.168.1.16:8000/Service/updateService/$id";
     var response = await http.put(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
@@ -29,7 +29,7 @@ class Notificationscontroller {
   }
   //getAllServicesReparation
   static Future<List> getAllServicesReparation(String userID) async {
-    var url = "http://192.168.1.17:8000/Service/getAllServicesReparation/$userID";
+    var url = "http://192.168.1.16:8000/Service/getAllServicesReparation/$userID";
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       //print("Response Data: ${response.body}");

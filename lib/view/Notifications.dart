@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // استيراد مكتبة intl
 import 'package:mabo_auto_help/controller/NotificationsController.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -97,9 +97,129 @@ class _NotificationsState extends State<Notifications> {
       ),
     );
   }
+}*/
+//----------------------------------------------------------------------------------------------------
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // استيراد مكتبة intl
+import 'package:mabo_auto_help/controller/NotificationsController.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+
+class Notifications extends StatefulWidget {
+  final String userID;
+  const Notifications({super.key, required this.userID});
+
+  @override
+  State<Notifications> createState() => _NotificationsState();
+}
+
+class _NotificationsState extends State<Notifications> {
+  late Future<List> notifications;
+
+  @override
+  void initState() {
+    super.initState();
+    notifications = Notificationscontroller.getNotifications(widget.userID);
+  }
+
+  String formatDate(String dateStr) {
+    DateTime dateTime = DateTime.parse(dateStr);
+    return DateFormat('yyyy-MM-dd').format(dateTime);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      
+      body: FutureBuilder<List>(
+        future: notifications,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('فشل في تحميل الإشعارات'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('لا توجد إشعارات'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                var notification = snapshot.data![index];
+                return Card(
+                  margin: EdgeInsets.all(8.0),
+                  child: ListTile(
+                    title: Text(
+                      notification['serviceName'] ?? 'No service name',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF003366), // الأزرق الداكن
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'التاريخ: ${formatDate(notification['date'])}',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                        Text(
+                          'الوقت: ${notification['time'] ?? 'لا يوجد وقت'}',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                        Text(
+                          'نوع السيارة: ${notification['carType'] ?? 'لا يوجد نوع سيارة'}',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                        Text(
+                          'المكان: ${notification['lieu'] ?? 'لا يوجد مكان'}',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                        Text(
+                          'نوع إتا: ${notification['ita'] ?? 'لا يوجد نوع إتا'}',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                      ],
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.qr_code, color: Color(0xFFFFD700)), // لون أيقونة QR code أصفر
+                      onPressed: () {
+                        if (notification['_id'] != null) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('QR Code'),
+                              content: SizedBox(
+                                width: 200.0, // عرض محدد
+                                height: 200.0, // ارتفاع محدد
+                                child: QrImageView(
+                                  data: notification['_id'], // البيانات المستلمة من الخادم
+                                  version: QrVersions.auto,
+                                  size: 200.0,
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text('إغلاق'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
 }
 
 
+//---------------------------------------------------------------------------------------------------
 /*class Notifications extends StatefulWidget {
   final String userID;
   const Notifications({super.key, required this.userID});

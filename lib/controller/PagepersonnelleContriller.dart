@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class PagepersonnelleContriller {
   Future<Map<String, dynamic>> GetUser(String userID) async {
-    var url = "http://192.168.1.17:8000/users/getUser/$userID";
+    var url = "http://192.168.1.16:8000/users/getUser/$userID";
     var response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -15,7 +15,7 @@ class PagepersonnelleContriller {
   }
 
   Future<bool> UpdateUser(String userID, Map<String, String> userData) async {
-    var url = "http://192.168.1.17:8000/users/updateUser/$userID";
+    var url = "http://192.168.1.16:8000/users/updateUser/$userID";
     var response = await http.put(
       Uri.parse(url),
       headers: {"Content-Type": "application/json"},
