@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Authcontroller {
+  static var por = "18";
   Future LoginAuth(email, pwd) async {
-    var url = "http://192.168.1.16:8000/users/login";
+    var url = "http://192.168.1.$por:8000/users/login";
     var response = await http.post(Uri.parse(url),
         body: jsonEncode(<String, String>{'email': email, 'pwd': pwd}),
         headers: {"Content-Type": "application/json"});
@@ -14,7 +15,7 @@ class Authcontroller {
     }
   }
   Future SignupAuth(name ,email, pwd,tel) async {
-    var url = "http://192.168.1.16:8000/users/register";
+    var url = "http://192.168.1.$por:8000/users/register";
     var response = await http.post(Uri.parse(url),
         body: jsonEncode(<String, String>{
           'name': name,
