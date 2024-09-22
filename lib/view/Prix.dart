@@ -126,7 +126,7 @@ class _PrixState extends State<Prix> {
     return DateFormat('yyyy-MM-dd').format(dateTime);
   }
 
-  void handleAction(String id, String action) async {
+  /*void handleAction(String id, String action) async {
     String itaValue = (action == 'accept') ? 'yes' : 'no';
 
     try {
@@ -142,7 +142,35 @@ class _PrixState extends State<Prix> {
         SnackBar(content: Text('Failed to update service: $error')),
       );
     }
+  }*/
+  void handleAction(String id, String action) async {
+  String itaValue = (action == 'accept') ? 'yes' : 'no';
+
+  try {
+    
+    await Notificationscontroller.updateService(id, itaValue);
+
+    
+    if (itaValue == 'yes') {
+       await Notificationscontroller.getServiceID(id);
+
+      
+    }
+
+    
+    setState(() {
+      notifications = Notificationscontroller.getAllServicesReparation(widget.userID);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Service $itaValue successfully')),
+    );
+  } catch (error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Failed to update service: $error')),
+    );
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
