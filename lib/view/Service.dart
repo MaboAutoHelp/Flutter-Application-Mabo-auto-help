@@ -259,11 +259,13 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     );
   }
 }*/
+// اخير كود يخدم 
+/*
 import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/PagepersonnelleContriller.dart';
 import 'package:mabo_auto_help/controller/ServiceContriller.dart';
 
-import 'package:mabo_auto_help/view/Home.dart';
+//import 'package:mabo_auto_help/view/Home.dart';
 
 class Service extends StatefulWidget {
   final String userID;
@@ -562,5 +564,90 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
       ),
     );
   }
-}
+}*/
 
+import 'package:flutter/material.dart';
+import 'package:mabo_auto_help/view/Services/Electricite.dart';
+import 'package:mabo_auto_help/view/Services/Mecanique.dart';
+import 'package:mabo_auto_help/view/Services/Peinture.dart';
+import 'package:mabo_auto_help/view/Services/ServiceAdd.dart';
+
+
+class Service extends StatelessWidget {
+  final String userID;
+  const Service({Key? key, required this.userID}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Mecanique(userID: userID),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFFFD700), // لون الزر أصفر
+              ),
+              child: const Text('خدمات الميكانيك', style: TextStyle(color: Colors.black)),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Electricite(userID: userID),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFFFD700),
+              ),
+              child: const Text('خدمات الكهرباء', style: TextStyle(color: Colors.black)),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Peinture(userID: userID),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFFFD700),
+              ),
+              child: const Text('خدمات الدهان', style: TextStyle(color: Colors.black)),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ServiceAdd(userID: userID),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFFFD700),
+              ),
+              child: const Text('خدمات ', style: TextStyle(color: Colors.black)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
