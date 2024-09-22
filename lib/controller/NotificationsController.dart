@@ -28,6 +28,18 @@ class Notificationscontroller {
       throw Exception('Failed to update service');
     }
   }
+  static Future<void> getServiceID(String id) async {
+    var url = "http://192.168.1.$por:8000/Service/getServiceID/$id";
+    var response = await http.get(
+      Uri.parse(url),
+      
+      
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update service');
+    }
+  }
   //getAllServicesReparation
   static Future<List> getAllServicesReparation(String userID) async {
     var url = "http://192.168.1.$por:8000/Service/getAllServicesReparation/$userID";
