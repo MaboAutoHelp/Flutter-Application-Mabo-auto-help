@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Notificationscontroller {
-  static var por = "18";
+  static var por = "19";
   static Future<List> getNotifications(String userID) async {
     var url = "http://192.168.1.$por:8000/Service/getAllService/$userID";
     final response = await http.get(Uri.parse(url));

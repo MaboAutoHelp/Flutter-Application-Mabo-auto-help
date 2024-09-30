@@ -125,6 +125,24 @@ class _NotificationsState extends State<Notifications> {
     DateTime dateTime = DateTime.parse(dateStr);
     return DateFormat('yyyy-MM-dd').format(dateTime);
   }
+  Color getItaTypeColor(String itaType) {
+    switch (itaType) {
+      case 'attente':
+        return Colors.orange;
+      case 'accepted':
+        return Colors.green;
+      case 'rejected':
+        return Colors.red;
+      case 'La réparation est terminée':
+        return Colors.blue;
+      case 'Puis un problème':
+        return Colors.purple;
+      case 'yes':
+        return Colors.teal;
+      default:
+        return Colors.black;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,25 +176,27 @@ class _NotificationsState extends State<Notifications> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'التاريخ: ${formatDate(notification['date'])}',
+                          'Date ${formatDate(notification['date'])}',
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                         Text(
-                          'الوقت: ${notification['time'] ?? 'لا يوجد وقت'}',
+                          'Time : ${notification['time'] ?? 'لا يوجد وقت'}',
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                         Text(
-                          'نوع السيارة: ${notification['carType'] ?? 'لا يوجد نوع سيارة'}',
+                          'Car Type ${notification['carType'] ?? 'لا يوجد نوع سيارة'}',
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                         Text(
-                          'المكان: ${notification['lieu'] ?? 'لا يوجد مكان'}',
+                          'Lendroit ${notification['lieu'] ?? 'لا يوجد مكان'}',
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                         Text(
-                          'نوع إتا: ${notification['ita'] ?? 'لا يوجد نوع إتا'}',
-                          style: TextStyle(color: Colors.grey[600]),
+                        'Ita Type: ${notification['ita'] ?? 'No ita type'}',
+                        style: TextStyle(
+                          color: getItaTypeColor(notification['ita'] ?? 'No ita type'),
                         ),
+                      ),
                       ],
                     ),
                     trailing: IconButton(
