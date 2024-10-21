@@ -12,7 +12,7 @@ class Mecanique extends StatefulWidget {
   State<Mecanique> createState() => _MecaniqueState();
 }
 
-class _MecaniqueState extends State<Mecanique> {
+class _MecaniqueState extends State<Mecanique > {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

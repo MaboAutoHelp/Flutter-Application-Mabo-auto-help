@@ -33,7 +33,7 @@ class _ElectriciteState extends State<Electricite> {
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
-                      serviceName: 'Electricite 1  ',
+                      serviceName: 'le changement d’huile'  ,
                       prix: 50,
                     ),
                   ),
@@ -42,7 +42,7 @@ class _ElectriciteState extends State<Electricite> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700), // لون الزر أصفر
               ),
-              child: const Text('Electricite 1', style: TextStyle(color: Colors.black)),
+              child: const Text('le changement d’huile', style: TextStyle(color: Colors.black)),
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -52,7 +52,7 @@ class _ElectriciteState extends State<Electricite> {
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
-                      serviceName: 'Electricite 2',
+                      serviceName: 'les filtre',
                       prix: 100,
                     ),
                   ),
@@ -61,7 +61,7 @@ class _ElectriciteState extends State<Electricite> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700),
               ),
-              child: const Text('Electricite 2', style: TextStyle(color: Colors.black)),
+              child: const Text('les filtre', style: TextStyle(color: Colors.black)),
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -71,7 +71,7 @@ class _ElectriciteState extends State<Electricite> {
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
-                      serviceName: 'Electricite 3',
+                      serviceName: 'les pneus',
                       prix: 150,
                     ),
                   ),
@@ -80,7 +80,7 @@ class _ElectriciteState extends State<Electricite> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700),
               ),
-              child: const Text('Electricite 3', style: TextStyle(color: Colors.black)),
+              child: const Text('les pneus', style: TextStyle(color: Colors.black)),
             ),
           ],
         ),

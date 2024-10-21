@@ -33,7 +33,7 @@ class _PeintureState extends State<Peinture> {
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
-                      serviceName: 'Peinture 1',
+                      serviceName: 'réparation de batteries',
                       prix: 50,
                     ),
                   ),
@@ -42,7 +42,7 @@ class _PeintureState extends State<Peinture> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700), // لون الزر أصفر
               ),
-              child: const Text('Peinture 1', style: TextStyle(color: Colors.black)),
+              child: const Text('réparation de batteries', style: TextStyle(color: Colors.black)),
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -52,7 +52,7 @@ class _PeintureState extends State<Peinture> {
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
-                      serviceName: 'Peinture 2',
+                      serviceName: 'de systèmes électriques',
                       prix: 100,
                     ),
                   ),
@@ -61,7 +61,7 @@ class _PeintureState extends State<Peinture> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700),
               ),
-              child: const Text('Peinture 2', style: TextStyle(color: Colors.black)),
+              child: const Text('de systèmes électriques', style: TextStyle(color: Colors.black)),
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -71,7 +71,7 @@ class _PeintureState extends State<Peinture> {
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
-                      serviceName: 'Peinture 3',
+                      serviceName: '?',
                       prix: 150,
                     ),
                   ),
@@ -80,7 +80,7 @@ class _PeintureState extends State<Peinture> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700),
               ),
-              child: const Text('Peinture 3', style: TextStyle(color: Colors.black)),
+              child: const Text('?', style: TextStyle(color: Colors.black)),
             ),
           ],
         ),
