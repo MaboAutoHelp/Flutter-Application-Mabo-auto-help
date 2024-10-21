@@ -33,7 +33,7 @@ class _ServiceAddState extends State<ServiceAdd> {
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
-                      serviceName: 'ServiceAdd 1',
+                      serviceName: 'remorquage de voitures',
                       prix: 50,
                     ),
                   ),
@@ -42,7 +42,7 @@ class _ServiceAddState extends State<ServiceAdd> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700), // لون الزر أصفر
               ),
-              child: const Text('ServiceAdd 1', style: TextStyle(color: Colors.black)),
+              child: const Text('remorquage de voitures', style: TextStyle(color: Colors.black)),
             ),
             SizedBox(height: 10),
             ElevatedButton(

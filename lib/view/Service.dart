@@ -598,7 +598,7 @@ class Service extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700), // لون الزر أصفر
               ),
-              child: const Text('خدمات الميكانيك', style: TextStyle(color: Colors.black)),
+              child: const Text('Diagnostic des défauts', style: TextStyle(color: Colors.black)),
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -613,7 +613,7 @@ class Service extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700),
               ),
-              child: const Text('خدمات الكهرباء', style: TextStyle(color: Colors.black)),
+              child: const Text('Entretien régulier', style: TextStyle(color: Colors.black)),
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -628,8 +628,9 @@ class Service extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700),
               ),
-              child: const Text('خدمات الدهان', style: TextStyle(color: Colors.black)),
+              child: const Text('Services électriques automobiles', style: TextStyle(color: Colors.black)),
             ),
+            
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
@@ -643,7 +644,7 @@ class Service extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700),
               ),
-              child: const Text('خدمات ', style: TextStyle(color: Colors.black)),
+              child: const Text('Assistance d urgence', style: TextStyle(color: Colors.black)),
             ),
           ],
         ),
