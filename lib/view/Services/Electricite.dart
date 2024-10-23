@@ -121,10 +121,17 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
   ];
 
   final List<String> carTypes = [
-    'سيدان',
-    'دفع رباعي',
-    'هاتشباك',
-    'شاحنة',
+    'Ferrari', 'Porsche', 'Audi', 'Lamborghini', 'Volkswagen', 
+  'Mercedes-Benz', 'Renault', 'Chevrolet', 'Jaguar', 'Lexus', 
+  'BMW', 'Toyota', 'Honda', 'Ford', 'Nissan', 
+  'Bugatti', 'Opel', 'Mitsubishi', 'Alfa Romeo', 'Hyundai', 
+  'Peugeot', 'Volvo', 'Subaru', 'Kia', 'Fiat', 
+  'Infiniti', 'Škoda', 'MINI', 'Saab', 'Acura', 
+  'Dodge', 'Jeep', 'Land Rover', 'Lincoln', 'Isuzu', 
+  'Pontiac', 'Lancia', 'MG', 'Maybach', 'Lotus', 
+  'Rolls-Royce', 'Maserati', 'Austin', 'Holden', 'Smart', 
+  'Morgan', 'Koenigsegg', 'Tesla', 'Scion', 'BYD', 
+  'Daewoo', 'Rambler', 'Abarth', 'Willys'
   ];
 
   void _selectDate(BuildContext context) async {

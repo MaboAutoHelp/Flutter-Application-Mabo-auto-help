@@ -4,15 +4,15 @@ import 'package:mabo_auto_help/controller/ServiceContriller.dart';
 
 //import 'package:mabo_auto_help/view/Home.dart';
 
-class Peinture extends StatefulWidget {
+class Technique extends StatefulWidget {
   final String userID;
-  const Peinture({super.key, required this.userID});
+  const Technique({super.key, required this.userID});
 
   @override
-  State<Peinture> createState() => _PeintureState();
+  State<Technique> createState() => _TechniqueState();
 }
 
-class _PeintureState extends State<Peinture> {
+class _TechniqueState extends State<Technique> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +33,7 @@ class _PeintureState extends State<Peinture> {
                   MaterialPageRoute(
                     builder: (context) => ServiceDetailPage(
                       userID: widget.userID,
-                      serviceName: 'réparation de batteries',
+                      serviceName: 'service visite technique',
                       prix: 50,
                     ),
                   ),
@@ -42,46 +42,10 @@ class _PeintureState extends State<Peinture> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFD700), // لون الزر أصفر
               ),
-              child: const Text('réparation de batteries', style: TextStyle(color: Colors.black)),
+              child: const Text('service visite technique', style: TextStyle(color: Colors.black)),
             ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ServiceDetailPage(
-                      userID: widget.userID,
-                      serviceName: 'de systèmes électriques',
-                      prix: 100,
-                    ),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFFD700),
-              ),
-              child: const Text('de systèmes électriques', style: TextStyle(color: Colors.black)),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ServiceDetailPage(
-                      userID: widget.userID,
-                      serviceName: '?',
-                      prix: 150,
-                    ),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFFD700),
-              ),
-              child: const Text('?', style: TextStyle(color: Colors.black)),
-            ),
+            
+            
           ],
         ),
       ),

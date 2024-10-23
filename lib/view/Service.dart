@@ -571,6 +571,7 @@ import 'package:mabo_auto_help/view/Services/Electricite.dart';
 import 'package:mabo_auto_help/view/Services/Mecanique.dart';
 import 'package:mabo_auto_help/view/Services/Peinture.dart';
 import 'package:mabo_auto_help/view/Services/ServiceAdd.dart';
+import 'package:mabo_auto_help/view/Services/Technique.dart';
 
 
 class Service extends StatelessWidget {
@@ -645,6 +646,21 @@ class Service extends StatelessWidget {
                 backgroundColor: Color(0xFFFFD700),
               ),
               child: const Text('Assistance d urgence', style: TextStyle(color: Colors.black)),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Technique(userID: userID),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFFFD700),
+              ),
+              child: const Text('service visite technique', style: TextStyle(color: Colors.black)),
             ),
           ],
         ),
