@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/PagepersonnelleContriller.dart';
 import 'package:mabo_auto_help/controller/ServiceContriller.dart';
+import 'package:mabo_auto_help/view/Services/ServiceDetailPage.dart';
 
 
 
@@ -90,7 +91,7 @@ class _ElectriciteState extends State<Electricite> {
 }
 
 // ServiceDetailPage
-class ServiceDetailPage extends StatefulWidget {
+/*class ServiceDetailPage extends StatefulWidget {
   final String userID;
   final String serviceName;
   final int prix;
@@ -313,4 +314,4 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
       ),
     );
   }
-}
+}*/

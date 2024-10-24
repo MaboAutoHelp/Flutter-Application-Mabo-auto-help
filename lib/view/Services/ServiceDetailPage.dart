@@ -1,97 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/PagepersonnelleContriller.dart';
 import 'package:mabo_auto_help/controller/ServiceContriller.dart';
-import 'package:mabo_auto_help/view/Services/ServiceDetailPage.dart';
 
-//import 'package:mabo_auto_help/view/Home.dart';
-
-class Peinture extends StatefulWidget {
-  final String userID;
-  const Peinture({super.key, required this.userID});
-
-  @override
-  State<Peinture> createState() => _PeintureState();
-}
-
-class _PeintureState extends State<Peinture> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('الخدمات', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color(0xFF003366), // الأزرق الداكن
-        
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ServiceDetailPage(
-                      userID: widget.userID,
-                      serviceName: 'réparation de batteries',
-                      prix: 50,
-                    ),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFFD700), // لون الزر أصفر
-              ),
-              child: const Text('réparation de batteries', style: TextStyle(color: Colors.black)),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ServiceDetailPage(
-                      userID: widget.userID,
-                      serviceName: 'de systèmes électriques',
-                      prix: 100,
-                    ),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFFD700),
-              ),
-              child: const Text('de systèmes électriques', style: TextStyle(color: Colors.black)),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ServiceDetailPage(
-                      userID: widget.userID,
-                      serviceName: '?',
-                      prix: 150,
-                    ),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFFD700),
-              ),
-              child: const Text('?', style: TextStyle(color: Colors.black)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// ServiceDetailPage
-/*
 class ServiceDetailPage extends StatefulWidget {
   final String userID;
   final String serviceName;
@@ -315,4 +225,4 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
       ),
     );
   }
-}*/
+}
