@@ -65,6 +65,7 @@ import 'package:mabo_auto_help/view/PagePersonnelle.dart';
 import 'package:mabo_auto_help/view/Service.dart';
 import 'package:mabo_auto_help/view/notifications.dart';
 import 'package:mabo_auto_help/view/prix.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
   final String userID;
@@ -76,6 +77,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final String phoneNumber = '92372783';
+
+  void _makePhoneCall() async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -124,7 +134,27 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: _makePhoneCall,
+              tooltip: 'اتصل',
+              child: const Icon(Icons.phone),
+            ),
+            const SizedBox(height: 8), // مسافة بين الزر والنص
+            Text(
+              "Contactez-nous en cas d'urgence",
+              style: TextStyle(
+                fontSize: 16, // حجم النص
+                color: Colors.black, // لون النص
+              ),
+            ),
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
+      
     );
   }
 }

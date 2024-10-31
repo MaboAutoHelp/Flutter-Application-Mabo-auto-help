@@ -217,9 +217,10 @@ class _LoginState extends State<Login> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Mabo Auto Help',
-                      style: TextStyle(
-                          fontSize: 30, color: Colors.blue.shade900)), // أزرق داكن
+                  Image.asset(
+                    'assets/images/mado.jpg', 
+                    
+                  ),
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),

@@ -201,6 +201,10 @@ class _NotificationsState extends State<Notifications> {
                           color: getItaTypeColor(notification['ita'] ?? 'No ita type'),
                         ),
                       ),
+                      Text(
+                        'lieuMicanicien: ${notification['lieuMicanicien'] ?? 'No lieuMicanicien '}',
+                        
+                      ),
                       ],
                     ),
                     trailing: IconButton(
