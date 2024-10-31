@@ -662,6 +662,21 @@ class Service extends StatelessWidget {
               ),
               child: const Text('service visite technique', style: TextStyle(color: Colors.black)),
             ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Technique(userID: userID),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFFFD700),
+              ),
+              child: const Text('Remplacement des pièces de rechange', style: TextStyle(color: Colors.black)),
+            ),
           ],
         ),
       ),
