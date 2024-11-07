@@ -565,7 +565,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     );
   }
 }*/
-
+/*
 import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/view/Services/Electricite.dart';
 import 'package:mabo_auto_help/view/Services/Mecanique.dart';
@@ -682,4 +682,145 @@ class Service extends StatelessWidget {
       ),
     );
   }
+}*/
+import 'package:flutter/material.dart';
+import 'package:mabo_auto_help/view/Services/Electricite.dart';
+import 'package:mabo_auto_help/view/Services/Mecanique.dart';
+import 'package:mabo_auto_help/view/Services/Peinture.dart';
+import 'package:mabo_auto_help/view/Services/ServiceAdd.dart';
+import 'package:mabo_auto_help/view/Services/Technique.dart';
+
+class Service extends StatelessWidget {
+  final String userID;
+  const Service({Key? key, required this.userID}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Mecanique(userID: userID),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFFFD700),
+                  minimumSize: Size(double.infinity, 50), // عرض كامل الزر وارتفاع موحد
+                ),
+                child: const Text(
+                  'Diagnostic des défauts',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Electricite(userID: userID),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFFFD700),
+                  minimumSize: Size(double.infinity, 50),
+                ),
+                child: const Text(
+                  'Entretien régulier',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Peinture(userID: userID),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFFFD700),
+                  minimumSize: Size(double.infinity, 50),
+                ),
+                child: const Text(
+                  'Services électriques automobiles',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ServiceAdd(userID: userID),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFFFD700),
+                  minimumSize: Size(double.infinity, 50),
+                ),
+                child: const Text(
+                  'Assistance d urgence',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Technique(userID: userID),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFFFD700),
+                  minimumSize: Size(double.infinity, 50),
+                ),
+                child: const Text(
+                  'service visite technique',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Technique(userID: userID),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFFFD700),
+                  minimumSize: Size(double.infinity, 50),
+                ),
+                child: const Text(
+                  'Remplacement des pièces de rechange',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
+

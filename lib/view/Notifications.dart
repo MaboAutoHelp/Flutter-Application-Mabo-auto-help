@@ -99,7 +99,7 @@ class _NotificationsState extends State<Notifications> {
   }
 }*/
 //----------------------------------------------------------------------------------------------------
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // استيراد مكتبة intl
 import 'package:mabo_auto_help/controller/NotificationsController.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -244,7 +244,155 @@ class _NotificationsState extends State<Notifications> {
       ),
     );
   }
+}*/
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:mabo_auto_help/controller/NotificationsController.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class Notifications extends StatefulWidget {
+  final String userID;
+  const Notifications({super.key, required this.userID});
+
+  @override
+  State<Notifications> createState() => _NotificationsState();
 }
+
+class _NotificationsState extends State<Notifications> {
+  late Future<List> notifications;
+
+  @override
+  void initState() {
+    super.initState();
+    notifications = Notificationscontroller.getNotifications(widget.userID);
+  }
+
+  String formatDate(String dateStr) {
+    DateTime dateTime = DateTime.parse(dateStr);
+    return DateFormat('yyyy-MM-dd').format(dateTime);
+  }
+
+  Color getItaTypeColor(String itaType) {
+    switch (itaType) {
+      case 'attente':
+        return Colors.orange;
+      case 'accepted':
+        return Colors.green;
+      case 'rejected':
+        return Colors.red;
+      case 'La réparation est terminée':
+        return Colors.blue;
+      case 'Puis un problème':
+        return Colors.purple;
+      case 'yes':
+        return Colors.teal;
+      default:
+        return Colors.black;
+    }
+  }
+
+  Future<void> _openGoogleMaps(String locationUrl) async {
+    if (await canLaunch(locationUrl)) {
+      await launch(locationUrl);
+    } else {
+      throw 'تعذر فتح الرابط $locationUrl';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: FutureBuilder<List>(
+        future: notifications,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('فشل في تحميل الإشعارات'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('لا توجد إشعارات'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                var notification = snapshot.data![index];
+                return Card(
+                  margin: EdgeInsets.all(8.0),
+                  child: ListTile(
+                    title: Text(
+                      notification['serviceName'] ?? 'No service name',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF003366),
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Date ${formatDate(notification['date'])}', style: TextStyle(color: Colors.grey[600])),
+                        Text('Time : ${notification['time'] ?? 'لا يوجد وقت'}', style: TextStyle(color: Colors.grey[600])),
+                        Text('Car Type ${notification['carType'] ?? 'لا يوجد نوع سيارة'}', style: TextStyle(color: Colors.grey[600])),
+                        Text('Lendroit ${notification['lieu'] ?? 'لا يوجد مكان'}', style: TextStyle(color: Colors.grey[600])),
+                        Text('prix ${notification['prix'] ?? 'لا يوجد مكان'}', style: TextStyle(color: Colors.grey[600])),
+                        Text('Ita Type: ${notification['ita'] ?? 'No ita type'}', style: TextStyle(color: getItaTypeColor(notification['ita'] ?? 'No ita type'))),
+                        Row(
+                          children: [
+                            Text(
+                              'lieuMicanicien: ${notification['lieuMicanicien'] ?? 'No lieuMicanicien'}',
+                              style: TextStyle(color: Colors.grey[600]),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.map, color: Colors.blue),
+                              onPressed: () {
+                                if (notification['lieuMicanicien'] != null) {
+                                  _openGoogleMaps(notification['lieuMicanicien']);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.qr_code, color: Color(0xFFFFD700)),
+                      onPressed: () {
+                        if (notification['_id'] != null) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('QR Code'),
+                              content: SizedBox(
+                                width: 200.0,
+                                height: 200.0,
+                                child: QrImageView(
+                                  data: notification['_id'],
+                                  version: QrVersions.auto,
+                                  size: 200.0,
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text('إغلاق'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
+}
+
 
 
 //---------------------------------------------------------------------------------------------------
