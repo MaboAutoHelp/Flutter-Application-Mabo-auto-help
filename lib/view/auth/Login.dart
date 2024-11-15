@@ -218,7 +218,7 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/images/mado.jpg', 
+                    'assets/images/mado1.jpg', 
                     
                   ),
 

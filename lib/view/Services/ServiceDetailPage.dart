@@ -1,4 +1,4 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/PagepersonnelleContriller.dart';
 import 'package:mabo_auto_help/controller/ServiceContriller.dart';
 
@@ -225,9 +225,9 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
       ),
     );
   }
-}*/
-
-import 'package:flutter/material.dart';
+}
+//map
+/*import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/controller/PagepersonnelleContriller.dart';
 import 'package:mabo_auto_help/controller/ServiceContriller.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -340,7 +340,7 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
           selectedCarType!,
           selectedlieu!,
           widget.prix,
-          userLocation!, // تمرير إحداثيات الموقع
+           // تمرير إحداثيات الموقع
         );
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -476,3 +476,4 @@ class _ServiceDetailPageState extends State<ServiceDetailPage> {
     );
   }
 }
+*/

@@ -266,6 +266,8 @@ class _HomeState extends State<Home> {
 }
 
 */
+/////
+/*
 import 'package:flutter/material.dart';
 import 'package:mabo_auto_help/view/PagePersonnelle.dart';
 import 'package:mabo_auto_help/view/Service.dart';
@@ -379,4 +381,243 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+}*/
+/*
+import 'package:flutter/material.dart';
+import 'package:mabo_auto_help/view/PagePersonnelle.dart';
+import 'package:mabo_auto_help/view/Service.dart';
+import 'package:mabo_auto_help/view/notifications.dart';
+import 'package:mabo_auto_help/view/prix.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class Home extends StatefulWidget {
+  final String userID;
+
+  const Home({Key? key, required this.userID}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
 }
+
+class _HomeState extends State<Home> {
+  final String phoneNumber = '92372783';
+  final String message = 'مرحبا، احتاج إلى مساعدة بخصوص السيارة!';
+
+  // دالة لإجراء مكالمة هاتفية
+  void _makePhoneCall() async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
+  // دالة لإرسال رسالة عبر WhatsApp
+  void _sendWhatsAppMessage() async {
+    final Uri whatsappUri = Uri.parse('https://wa.me/$phoneNumber?text=${Uri.encodeComponent(message)}');
+    if (await canLaunchUrl(whatsappUri)) {
+      await launchUrl(whatsappUri);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('WhatsApp غير مثبت على الجهاز')),
+      );
+    }
+  }
+
+  void _signOut() {
+    Navigator.pop(context); // منطق تسجيل الخروج هنا
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      initialIndex: 1,
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text(
+            'Home',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: const Color(0xFF003366),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: _signOut,
+              tooltip: 'تسجيل خروج',
+            ),
+          ],
+          bottom: const TabBar(
+            indicatorColor: Color(0xFFFFD700),
+            tabs: <Widget>[
+              Tab(icon: Icon(Icons.assignment_ind_rounded, color: Colors.white)),
+              Tab(icon: Icon(Icons.car_crash_sharp, color: Colors.white)),
+              Tab(icon: Icon(Icons.circle_notifications, color: Colors.white)),
+              Tab(icon: Icon(Icons.pix, color: Colors.white)),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            Center(child: Pagepersonnelle(userID: widget.userID)),
+            Scaffold(
+              body: Center(
+                child: Service(userID: widget.userID),
+              ),
+              floatingActionButton: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FloatingActionButton(
+                    onPressed: _makePhoneCall,
+                    tooltip: 'اتصل',
+                    child: const Icon(Icons.phone),
+                  ),
+                  const SizedBox(width: 10),
+                  FloatingActionButton(
+                    onPressed: _sendWhatsAppMessage,
+                    tooltip: 'ارسل رسالة واتساب',
+                    child: const Icon(Icons.message),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    "Contactez-nous en cas d'urgence",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            ),
+            Center(child: Notifications(userID: widget.userID)),
+            Center(child: Prix(userID: widget.userID)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+*/
+import 'package:flutter/material.dart';
+import 'package:mabo_auto_help/view/PagePersonnelle.dart';
+import 'package:mabo_auto_help/view/Service.dart';
+import 'package:mabo_auto_help/view/notifications.dart';
+import 'package:mabo_auto_help/view/prix.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+class Home extends StatefulWidget {
+  final String userID;
+
+  const Home({Key? key, required this.userID}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final String phoneNumber = '92372783';
+  final String message = 'مرحبا، احتاج إلى مساعدة بخصوص السيارة!';
+
+  // دالة لإجراء مكالمة هاتفية
+  void _makePhoneCall() async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
+  // دالة لإرسال رسالة عبر WhatsApp
+  void _sendWhatsAppMessage() async {
+    final Uri whatsappUri = Uri.parse('https://wa.me/$phoneNumber?text=${Uri.encodeComponent(message)}');
+    if (await canLaunchUrl(whatsappUri)) {
+      await launchUrl(whatsappUri);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('WhatsApp غير مثبت على الجهاز')),
+      );
+    }
+  }
+
+  void _signOut() {
+    Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      initialIndex: 1,
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text(
+            'Home',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: const Color(0xFF003366),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: _signOut,
+              tooltip: 'تسجيل خروج',
+            ),
+          ],
+          bottom: const TabBar(
+            indicatorColor: Color(0xFFFFD700),
+            tabs: <Widget>[
+              Tab(icon: Icon(Icons.assignment_ind_rounded, color: Colors.white)),
+              Tab(icon: Icon(Icons.car_crash_sharp, color: Colors.white)),
+              Tab(icon: Icon(Icons.circle_notifications, color: Colors.white)),
+              Tab(icon: Icon(Icons.pix, color: Colors.white)),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            Center(child: Pagepersonnelle(userID: widget.userID)),
+            Scaffold(
+              body: Center(
+                child: Service(userID: widget.userID),
+              ),
+              floatingActionButton: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FloatingActionButton(
+                    onPressed: _makePhoneCall,
+                    tooltip: 'اتصل',
+                    child: const Icon(Icons.phone),
+                  ),
+                  const SizedBox(width: 10),
+                  FloatingActionButton(
+                    onPressed: _sendWhatsAppMessage,
+                    tooltip: 'ارسل رسالة واتساب',
+                    backgroundColor: Colors.green,
+                    child: const FaIcon(FontAwesomeIcons.whatsapp),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    "Contactez-nous en cas d'urgence",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            ),
+            Center(child: Notifications(userID: widget.userID)),
+            Center(child: Prix(userID: widget.userID)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

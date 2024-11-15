@@ -336,10 +336,11 @@ class _NotificationsState extends State<Notifications> {
                         Text('Lendroit ${notification['lieu'] ?? 'لا يوجد مكان'}', style: TextStyle(color: Colors.grey[600])),
                         Text('prix ${notification['prix'] ?? 'لا يوجد مكان'}', style: TextStyle(color: Colors.grey[600])),
                         Text('Ita Type: ${notification['ita'] ?? 'No ita type'}', style: TextStyle(color: getItaTypeColor(notification['ita'] ?? 'No ita type'))),
+                        Text('Tel micanicien: ${notification['tel'] ?? 'No tel'}', style: TextStyle(color: Colors.grey[600])),
                         Row(
                           children: [
                             Text(
-                              'lieuMicanicien: ${notification['lieuMicanicien'] ?? 'No lieuMicanicien'}',
+                              'lieuMicanicien: ',
                               style: TextStyle(color: Colors.grey[600]),
                             ),
                             IconButton(
